@@ -19,7 +19,9 @@
             --accent-pink: #FF1493; /* Rosa vibrante tipo Hot Pink */
             --soft-pink: #FFB6C1;
             --box-bg: #111111;
-            --whatsapp-green: #25D366;
+            --uber-black: #000000;
+            --waze-blue: #33ccff;
+            --maps-green: #34A853;
         }
 
         /* --- Reset y Estilos Base --- */
@@ -162,151 +164,99 @@
             color: white;
         }
 
-        /* --- Sección de Elección (Dinámica) --- */
-        .choice-section {
-            padding: 60px 20px 120px;
-            max-width: 700px;
+        /* --- Sección de Ubicación Confirmada (Shi-Nuá) --- */
+        .location-section {
+            padding: 60px 20px 100px;
+            max-width: 800px;
             margin: 0 auto;
         }
-        .choice-options {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin: 40px 0;
+        
+        .venue-card {
+            background: var(--box-bg);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 40px 20px;
+            margin-top: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
         }
         
-        .option-container {
-            background: var(--box-bg);
-            border-radius: 16px;
-            border: 1px solid #333;
+        .venue-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+            background: var(--accent-pink);
+        }
+
+        .reservation-info {
+            background: rgba(255, 20, 147, 0.1);
+            border: 1px solid var(--accent-pink);
+            padding: 15px;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 20px 0;
+            color: #fff;
+        }
+
+        .address-box {
+            color: #aaa;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+
+        /* Mapa Personalizado (Dark Mode via CSS) */
+        .map-container {
+            width: 100%;
+            height: 300px;
+            border-radius: 15px;
             overflow: hidden;
-            transition: transform 0.2s;
+            margin-bottom: 30px;
+            border: 1px solid #333;
             position: relative;
         }
         
-        .option-container:hover {
-            border-color: var(--soft-pink);
+        .map-frame {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            /* Filtro para invertir colores y hacer el mapa "oscuro" */
+            filter: grayscale(100%) invert(92%) contrast(83%);
         }
 
-        .option-label {
+        /* Botones de Transporte */
+        .transport-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .app-btn {
             display: flex;
             align-items: center;
-            padding: 20px;
-            cursor: pointer;
-            text-align: left;
-            width: 100%;
-        }
-
-        /* Custom Radio Button */
-        .option-label input[type="radio"] {
-            appearance: none;
-            background-color: #2a2a2a;
-            margin-right: 20px;
-            width: 24px; height: 24px;
-            border-radius: 50%;
-            display: grid;
-            place-content: center;
-            flex-shrink: 0;
-            border: 2px solid #444;
-            transition: all 0.2s;
-        }
-        .option-label input[type="radio"]::before {
-            content: "";
-            width: 12px; height: 12px;
-            border-radius: 50%;
-            transform: scale(0);
-            transition: 120ms transform ease-in-out;
-            background-color: var(--accent-pink);
-            box-shadow: 0 0 10px var(--accent-pink);
-        }
-        .option-label input[type="radio"]:checked {
-            border-color: var(--accent-pink);
-        }
-        .option-label input[type="radio"]:checked::before { transform: scale(1); }
-        .option-label input[type="radio"]:checked + span { color: white; }
-
-        .option-text {
-            display: flex;
-            flex-direction: column;
-        }
-        .option-name {
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: #ddd;
-            margin-bottom: 4px;
-        }
-        .option-desc {
-            font-size: 0.9rem;
-            color: #888;
-        }
-
-        .option-social {
-            background: #1a1a1a;
-            padding: 8px 20px;
-            text-align: right;
-            border-top: 1px solid #222;
-        }
-
-        .action-btn {
-            background: var(--accent-pink);
-            color: white;
-            border: none;
-            padding: 18px 50px;
-            font-size: 1.1rem;
+            justify-content: center;
+            padding: 12px 25px;
             border-radius: 50px;
-            cursor: pointer;
             font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(255, 20, 147, 0.4);
-            margin-top: 20px;
-            width: 100%;
-            max-width: 350px;
-        }
-        .action-btn:hover { 
-            background: #ff33a1; 
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.6);
-        }
-        .action-btn:active { transform: translateY(1px); }
-
-        /* Mensaje de Confirmación y Botón WhatsApp */
-        #confirmation-message {
-            display: none;
-            background: #111;
-            padding: 40px;
-            border-radius: 20px;
-            border: 2px solid var(--accent-pink);
-            margin-top: 30px;
-            animation: zoomIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 0 30px rgba(255, 20, 147, 0.2);
-        }
-        #confirmation-message h3 { margin-top: 0; }
-
-        .whatsapp-btn {
-            display: inline-block;
-            background-color: var(--whatsapp-green);
             color: white !important;
-            padding: 15px 30px;
-            border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            margin-top: 25px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-            border: 2px solid transparent;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 0.9rem;
+            min-width: 140px;
         }
-        .whatsapp-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
-            background-color: #1ebc57;
+        
+        .app-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
-        .whatsapp-btn i {
-            margin-right: 8px;
-            font-size: 1.2rem;
-        }
+        
+        .btn-uber { background-color: #000; border: 1px solid #333; }
+        .btn-waze { background-color: #33ccff; color: #000 !important; }
+        .btn-maps { background-color: #34A853; }
+        
+        .app-btn i { margin-right: 8px; font-size: 1.1rem; }
 
         footer { 
             padding: 40px 20px; 
@@ -321,18 +271,14 @@
             from { opacity: 0; transform: translateY(40px); } 
             to { opacity: 1; transform: translateY(0); } 
         }
-        @keyframes zoomIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
 
         /* Responsive adjustments */
         @media (max-width: 600px) {
             h1 { font-size: 2.5rem; }
             h2 { font-size: 1.8rem; }
             .hero-section { min-height: 70vh; }
-            .option-label { padding: 15px; }
-            .option-name { font-size: 1rem; }
+            .transport-buttons { flex-direction: column; width: 100%; }
+            .app-btn { width: 100%; }
         }
     </style>
 </head>
@@ -391,83 +337,56 @@
         </div>
     </section>
 
-    <!-- CHOICE SECTION -->
-    <section class="choice-section">
-        <h2>La Decisión es Tuya</h2>
-        <p style="margin-bottom: 30px; font-weight: 300;">
-            Quiero que te sientas como una reina. He seleccionado 3 opciones increíbles para ti. 
-            <br>¿Cuál te apetece más para mañana?
-        </p>
+    <!-- LOCATION CONFIRMED SECTION -->
+    <section class="location-section">
+        <h2>¡Nos vemos en Shi-Nuá!</h2>
         
-        <form id="venue-form">
-            <div class="choice-options">
-                
-                <!-- Opción 1: Shi-Nuá -->
-                <div class="option-container">
-                    <label class="option-label">
-                        <input type="radio" name="venue" value="Shi-Nuá">
-                        <span class="option-text">
-                            <span class="option-name">Shi-Nuá</span>
-                            <span class="option-desc">Elegancia y fusión chino-peruana de alto nivel.</span>
-                        </span>
-                    </label>
-                    <div class="option-social">
-                        <a href="https://www.instagram.com/shinuarestaurante/" target="_blank">
-                            <i class="fab fa-instagram"></i> Ver fotos en Instagram
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Opción 2: El Fogón del Asador -->
-                <div class="option-container">
-                    <label class="option-label">
-                        <input type="radio" name="venue" value="El Fogón del Asador">
-                        <span class="option-text">
-                            <span class="option-name">El Fogón del Asador</span>
-                            <span class="option-desc">Las mejores parrillas y vinos en un ambiente cálido.</span>
-                        </span>
-                    </label>
-                    <div class="option-social">
-                        <a href="https://www.instagram.com/elfogondelasador.parrillas/" target="_blank">
-                            <i class="fab fa-instagram"></i> Ver fotos en Instagram
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Opción 3: República del Pisco -->
-                <div class="option-container">
-                    <label class="option-label">
-                        <input type="radio" name="venue" value="República del Pisco">
-                        <span class="option-text">
-                            <span class="option-name">República del Pisco</span>
-                            <span class="option-desc">Restobar vibrante con música, cócteles y sabor.</span>
-                        </span>
-                    </label>
-                    <div class="option-social">
-                        <a href="https://www.instagram.com/republicadelpisco.lima/" target="_blank">
-                            <i class="fab fa-instagram"></i> Ver fotos en Instagram
-                        </a>
-                    </div>
-                </div>
-
-            </div>
+        <div class="venue-card">
+            <div style="font-size: 3rem; margin-bottom: 10px;">🐲🥂</div>
             
-            <button type="submit" class="action-btn" id="submit-btn">Confirmar Elección</button>
-        </form>
-
-        <!-- Mensaje de confirmación (Oculto inicialmente) -->
-        <div id="confirmation-message">
-            <div style="font-size: 3rem; margin-bottom: 10px;">🥂</div>
-            <h3>¡Excelente elección, mi amor!</h3>
-            <p style="font-size: 1.1rem; margin: 15px 0;">
-                Has elegido: <strong id="chosen-venue-text" style="color: var(--accent-pink); font-size: 1.3rem;"></strong>
+            <p style="font-size: 1.1rem; margin-bottom: 20px; font-weight: 300;">
+                Ahora que ya elegiste el lugar... <strong>¡prepárate para una noche inolvidable!</strong> 
+                Vamos a disfrutar de la mejor fusión y un ambiente increíble.
             </p>
-            <p>Ya estoy haciendo la reserva. Avísame para confirmar todo.</p>
-            
-            <!-- Botón de WhatsApp dinámico -->
-            <a id="whatsapp-link" href="#" target="_blank" class="whatsapp-btn">
-                <i class="fab fa-whatsapp"></i> Enviar confirmación a Chris
-            </a>
+
+            <div class="reservation-info">
+                <i class="fas fa-clipboard-check"></i> Reserva a nombre de: <br>
+                <span style="font-size: 1.2rem; font-weight: 700; text-transform: uppercase;">Christian Caceres</span>
+            </div>
+
+            <div class="address-box">
+                <p><i class="fas fa-map-marker-alt" style="color: var(--accent-pink);"></i> <strong>Dirección:</strong></p>
+                <p>Av. Víctor Andrés Belaunde 147, Vía Principal 133 (Real 2)<br>Distrito de San Isidro</p>
+            </div>
+
+            <!-- Mapa Integrado (Iframe) -->
+            <div class="map-container">
+                <iframe 
+                    class="map-frame"
+                    src="https://maps.google.com/maps?q=Av+Victor+Andres+Belaunde+147+San+Isidro&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <p style="font-size: 0.9rem; color: #888; margin-bottom: 15px;">¿Cómo quieres llegar?</p>
+
+            <!-- Botones de Apps -->
+            <div class="transport-buttons">
+                <!-- Uber (Link universal, intenta abrir app) -->
+                <a href="https://m.uber.com/ul/?action=setPickup&dropoff[formatted_address]=Av%20Victor%20Andres%20Belaunde%20147%2C%20San%20Isidro&dropoff[nickname]=Shi-Nua" target="_blank" class="app-btn btn-uber">
+                    <i class="fab fa-uber"></i> Pedir Uber
+                </a>
+                
+                <!-- Waze -->
+                <a href="https://waze.com/ul?q=Av%20Victor%20Andres%20Belaunde%20147%20San%20Isidro" target="_blank" class="app-btn btn-waze">
+                    <i class="fab fa-waze"></i> Ir con Waze
+                </a>
+
+                <!-- Google Maps -->
+                <a href="https://www.google.com/maps/search/?api=1&query=Av+Victor+Andres+Belaunde+147+San+Isidro" target="_blank" class="app-btn btn-maps">
+                    <i class="fas fa-map-marked-alt"></i> Google Maps
+                </a>
+            </div>
         </div>
 
     </section>
@@ -475,56 +394,6 @@
     <footer>
         <p>Hecho por Chris con mucho amor.... <span>❤</span></p>
     </footer>
-
-    <!-- Logic Script -->
-    <script>
-        document.getElementById('venue-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const selectedOption = document.querySelector('input[name="venue"]:checked');
-            
-            if (selectedOption) {
-                const venueName = selectedOption.value;
-                const form = document.getElementById('venue-form');
-                const confirmation = document.getElementById('confirmation-message');
-                const chosenText = document.getElementById('chosen-venue-text');
-                const whatsappLink = document.getElementById('whatsapp-link');
-
-                // Configurar enlace de WhatsApp
-                const phoneNumber = "51987207878";
-                const message = `¡Hola Chris! ❤️ He elegido celebrar mi cumple en: *${venueName}*. ¡Estoy lista para mañana!`;
-                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-                
-                whatsappLink.href = whatsappUrl;
-                
-                // Efecto de desvanecimiento para el formulario
-                form.style.opacity = '0';
-                form.style.transform = 'translateY(-20px)';
-                form.style.transition = 'all 0.5s ease';
-                
-                setTimeout(() => {
-                    form.style.display = 'none';
-                    chosenText.textContent = venueName;
-                    confirmation.style.display = 'block';
-                    
-                    // Scroll suave hacia el mensaje
-                    confirmation.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    
-                }, 500);
-
-            } else {
-                // Animación de error si no selecciona nada
-                const btn = document.getElementById('submit-btn');
-                btn.style.transform = 'translateX(10px)';
-                setTimeout(() => btn.style.transform = 'translateX(-10px)', 100);
-                setTimeout(() => btn.style.transform = 'translateX(10px)', 200);
-                setTimeout(() => btn.style.transform = 'translateX(0)', 300);
-                
-                // Alert simple
-                alert("¡Ups! Por favor selecciona una opción antes de confirmar.");
-            }
-        });
-    </script>
 
 </body>
 </html>
